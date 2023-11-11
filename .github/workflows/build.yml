@@ -1,0 +1,59 @@
+name: BeforeMerge
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  continuous-integration-before-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python all python version
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Python Virtual ENV
+        run: pip3 install virtualenv
+
+      - name: Activate and Install Dependencies into Virtual env
+        run: python -m venv venv && source venv/bin/activate &&
+          pip3 install -r requirements.txt
+
+      - name: Install Dev dependencies
+        run: pip3 install -r requirements-dev.txt
+
+      - name: Run Flake8
+        run: . venv/bin/activate && flake8 .
+
+      - name: Run Black Check
+        run: |
+          . venv/bin/activate
+          if ! black --check project; then
+            echo "Black found formatting issues."
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+
+      - name: Run Test
+        run: . venv/bin/activate && pytest
+
+      - name: Create Zipfile archive of Dependencies
+        run: |
+          cd ./venv/lib/python3.8/site-packages
+          zip -r9 ../../../../api.zip .
+
+      - name: Add App to Zipfile
+        run: cd ./project && zip -g ../api.zip -r .
+
+      - name: Upload zip file artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: api
+          path: api.zip
