@@ -3,3 +3,9 @@ gunicorn==21.2.0
 uvicorn==0.24.0.post1
 python-dotenv==1.0.0
 mangum==0.17.0
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+sqlalchemy-utils==0.41.1
+python-jose==3.3.0
+passlib[bcrypt]==1.7.4
+pydantic[email]==2.4.2
