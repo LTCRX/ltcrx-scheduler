@@ -1,6 +1,6 @@
 [tool.pytest.ini_options]
 pythonpath = [
-  "irrigation_design_system_backend"
+  "project"
 ]
 
 [tool.black]
