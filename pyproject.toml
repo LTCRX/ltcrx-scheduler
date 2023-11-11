@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+pythonpath = [
+  "irrigation_design_system_backend"
+]
+
+[tool.black]
+line-length = 100
+exclude = '''
+/(\.git|\.venv|\venv|\.pgdata|__pycache__|dist|build|\.eggs)/
+'''

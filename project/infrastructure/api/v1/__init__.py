@@ -1,8 +1,6 @@
 from fastapi import APIRouter
 
-from infrastructure.api.v1.controller import (
-    scheduler_controller
-)
+from infrastructure.api.v1.controller import scheduler_controller
 
 router = APIRouter()
 

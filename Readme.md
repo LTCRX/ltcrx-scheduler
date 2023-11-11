@@ -47,3 +47,19 @@ cd ./project && uvicorn main:app --reload
 7.Accessing the API
    http://127.0.0.1:8000/docs#/
 
+8.CodeChecks: 
+
+check with flake8
+```bash
+flake8 .
+```
+
+check with black
+```bash
+black --check project
+```
+
+format with black
+```bash
+black .
+```
