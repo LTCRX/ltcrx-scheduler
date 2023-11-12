@@ -23,3 +23,4 @@ def create_user(user_input: UserCreateInput, db: Session = Depends(get_db)) -> U
         return UserOutput.from_domain(user_persisted)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail=f"Error: {e}")
+
