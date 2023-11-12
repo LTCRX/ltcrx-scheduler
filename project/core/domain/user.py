@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from core.configs.hashing import Hasher
+from core.services.hashing import Hasher
 
 
 @dataclass
@@ -19,7 +19,7 @@ class User:
             id=None,
             username=username,
             email=email,
-            hashed_password=Hasher.get_password_hash(password)
+            hashed_password=Hasher.get_password_hash(password),
         )
 
     @classmethod
@@ -29,5 +29,5 @@ class User:
             username=username,
             email=email,
             hashed_password=Hasher.get_password_hash(password),
-            is_superuser=True
+            is_superuser=True,
         )

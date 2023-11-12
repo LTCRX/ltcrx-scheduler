@@ -1,4 +1,3 @@
-from functools import wraps
 from typing import Generator
 
 from sqlalchemy import create_engine
@@ -21,6 +20,6 @@ def get_db() -> Generator:
         db = SessionLocal()
         yield db
     except Exception as e:
-        print(f'error {e}')
+        print(f"error {e}")
     finally:
         db.close()

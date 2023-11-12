@@ -20,16 +20,16 @@ class UserModel(Base):
             email=self.email,
             hashed_password=self.hashed_password,
             is_active=self.is_active,
-            is_superuser=self.is_superuser
+            is_superuser=self.is_superuser,
         )
 
     @classmethod
-    def from_domain(cls, user: User) -> 'UserModel':
+    def from_domain(cls, user: User) -> "UserModel":
         return UserModel(
             id=user.id,
             username=user.username,
             email=user.email,
             hashed_password=user.hashed_password,
             is_active=user.is_active,
-            is_superuser=user.is_superuser
+            is_superuser=user.is_superuser,
         )

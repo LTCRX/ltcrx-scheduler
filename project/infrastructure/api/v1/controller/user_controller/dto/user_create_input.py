@@ -1,6 +1,5 @@
 from pydantic import BaseModel, EmailStr
 
-from core.configs.hashing import Hasher
 from core.domain.user import User
 
 
@@ -11,7 +10,5 @@ class UserCreateInput(BaseModel):
 
     def to_domain(self) -> User:
         return User.create_normal_user(
-            username=self.username,
-            email=self.email,
-            password=self.password
+            username=self.username, email=self.email, password=self.password
         )

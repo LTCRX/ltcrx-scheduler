@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from typing import Any
 from sqlalchemy import Column, DateTime
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
@@ -22,4 +21,3 @@ class Base:
 
     def from_domain(self):
         raise NotImplementedError("from_domain")
-
