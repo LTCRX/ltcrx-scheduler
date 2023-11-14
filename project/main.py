@@ -5,17 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from core.configs.settings import settings
 from infrastructure.api.v1 import router as api_router
-from infrastructure.persistence.models.base import Base
 from infrastructure.persistence.repository.session import engine
 
 
 def create_database_if_not_exists():
     if not database_exists(engine.url):
         create_database(engine.url)
-
-
-def create_tables():
-    Base.metadata.create_all(bind=engine)
 
 
 def start_application():
@@ -32,7 +27,6 @@ def start_application():
         allow_headers=["*"],
     )
     create_database_if_not_exists()
-    create_tables()
     app.include_router(api_router, prefix="/api/v1")
     return app
 
