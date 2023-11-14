@@ -63,3 +63,14 @@ format with black
 ```bash
 black .
 ```
+
+9. database migrate 
+create migrations
+```bash
+alembic revision --autogenerate -m "First commit"
+```
+
+apply migrations
+```bash
+alembic upgrade head
+```
