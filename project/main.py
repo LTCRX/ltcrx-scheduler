@@ -12,7 +12,6 @@ def start_application():
         varion=settings.PROJECT_VERSION,
         root_path=settings.ROOT_PATH,
     )
-
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
