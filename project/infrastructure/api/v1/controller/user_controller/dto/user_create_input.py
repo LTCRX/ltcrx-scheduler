@@ -10,5 +10,7 @@ class UserCreateInput(BaseModel):
 
     def to_domain(self) -> User:
         return User.create_normal_user(
-            username=self.username, email=self.email, password=self.password
+            username=self.username,
+            email=self.email,
+            password=self.password,
         )

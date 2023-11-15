@@ -1,10 +1,6 @@
 from fastapi import APIRouter
 
-from infrastructure.api.v1.controller import (
-    scheduler_controller,
-    user_controller,
-    token_controler
-)
+from infrastructure.api.v1.controller import scheduler_controller, user_controller, token_controler
 
 router = APIRouter()
 

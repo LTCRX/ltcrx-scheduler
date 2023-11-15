@@ -18,8 +18,8 @@ router = APIRouter()
 
 @router.post("/", response_model=TokenOutput)
 def login_for_access_token(
-        form_data: OAuth2PasswordRequestForm = Depends(),
-        db: Session = Depends(get_db),
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db),
 ) -> TokenOutput:
     """
     Generate a token to access endpoints

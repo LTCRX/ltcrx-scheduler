@@ -7,7 +7,6 @@ from sqlalchemy.orm import Session
 
 
 class PostgresUserRepositoryAdapter(UserRepositoryPort):
-
     def __init__(self, db: Session):
         self.db = db
 
