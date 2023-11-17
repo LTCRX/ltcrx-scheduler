@@ -6,6 +6,12 @@ router = APIRouter()
 
 router.include_router(
     scheduler_controller.dummy_controller.router,
+    prefix="/dummy",
+    tags=["Endpoint to scheduler experiments on LTC-RX"],
+)
+
+router.include_router(
+    scheduler_controller.scheduler_controller.router,
     prefix="/scheduler",
     tags=["Endpoint to scheduler experiments on LTC-RX"],
 )

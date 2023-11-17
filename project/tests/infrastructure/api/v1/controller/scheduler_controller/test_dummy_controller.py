@@ -14,6 +14,6 @@ class TestDummyEndpoint:
         app.dependency_overrides[get_user_by_token] = lambda: mock_user
 
     def test_dummy_endpoint(self):
-        response = self.client.get("/api/v1/scheduler/dummy")
+        response = self.client.get("/api/v1/dummy/dummy")
         assert response.status_code == 200
         assert response.json() == {"response": "scheduller dummy endpoint, current_user=mock_user"}
