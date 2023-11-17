@@ -1,5 +1,5 @@
 from dataclasses import asdict
-
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Boolean
 
 from core.domain.user import User
@@ -27,6 +27,8 @@ class UserModel(Base):
 
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
+
+    schedulers = relationship("SchedulerModel", back_populates="user")
 
     def to_domain(self) -> User:
         return User(
