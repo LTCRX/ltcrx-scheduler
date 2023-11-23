@@ -12,6 +12,7 @@ class RequestSchedulerInput(BaseModel):
     end_date: date = Field(..., description="End date and time")
     quantity_samples: int = Field(..., description="Quantity of samples")
     number_of_scans: int = Field(..., description="Number of scans")
+    protocol: str = Field(..., description="Number of protocol")
     voltage: Optional[float] = Field(None, description="Voltage value in volts")
     current: Optional[float] = Field(None, description="Current value in microamperes")
     filter: Optional[float] = Field(None, description="Filter value")
@@ -31,6 +32,7 @@ class RequestSchedulerInput(BaseModel):
             end_date=self.end_date,
             quantity_samples=self.quantity_samples,
             number_of_scans=self.number_of_scans,
+            protocol=self.protocol,
             voltage=self.voltage,
             current=self.current,
             filter=self.filter,
