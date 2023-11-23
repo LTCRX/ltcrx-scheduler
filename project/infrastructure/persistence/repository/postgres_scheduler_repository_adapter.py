@@ -21,4 +21,4 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         if scheduler_model is None:
             return None
         else:
-            return scheduler_model.to_domain()
+            return scheduler_model
