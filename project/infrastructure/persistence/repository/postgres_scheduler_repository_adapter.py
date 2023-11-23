@@ -15,3 +15,10 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         self.db.commit()
         self.db.refresh(scheduler_model)
         return scheduler_model.to_domain()
+
+    def get_by_protocol(self, protocol: str) -> Scheduler:
+        scheduler_model = self.session.query(SchedulerModel).filter(SchedulerModel.protocol == protocol).first()
+        if scheduler_model is None:
+            return None
+        else:
+            return scheduler_model.to_domain()

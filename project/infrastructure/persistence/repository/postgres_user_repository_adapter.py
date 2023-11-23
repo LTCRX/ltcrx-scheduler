@@ -34,10 +34,3 @@ class PostgresUserRepositoryAdapter(UserRepositoryPort):
         if user_model is None:
             return None
         return user_model.to_domain()
-
-    def get_by_protocol(self, protocol: str) -> Optional[Scheduler]:
-        scheduler_model = self.session.query(SchedulerModel).filter(SchedulerModel.protocol == protocol).first()
-        if scheduler_model is None:
-            return None
-        else:
-            return scheduler_model.to_domain()
