@@ -1,4 +1,3 @@
-from project.core.ports.scheduler_repository_port import SchedulerRepositoryPort
 from infrastructure.persistence.repository.postgres_scheduler_repository_adapter import (
     PostgresSchedulerRepositoryAdapter,
 )
