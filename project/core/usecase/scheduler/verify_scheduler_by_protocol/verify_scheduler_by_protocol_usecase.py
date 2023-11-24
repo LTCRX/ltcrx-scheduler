@@ -4,6 +4,7 @@ from infrastructure.persistence.repository.postgres_scheduler_repository_adapter
     PostgresSchedulerRepositoryAdapter,
 )
 
+
 class VerifySchedulerByProtocolUseCase(UseCaseInterface):
     def __init__(self, db: Session):
         self.repository = PostgresSchedulerRepositoryAdapter(db)
