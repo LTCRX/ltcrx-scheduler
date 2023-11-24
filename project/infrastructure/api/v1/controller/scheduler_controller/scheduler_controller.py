@@ -33,10 +33,9 @@ def request_scheduler(
     return usecase.execute(scheduler_input)
 
 
-@router.post('/verify-status', response_model=VerifyByProtocolOutput)
+@router.post("/verify-status", response_model=VerifyByProtocolOutput)
 def verify_status(
-        scheduler_input: VerifyByProtocolInput,
-        db: Session = Depends(get_db)
+        scheduler_input: VerifyByProtocolInput, db: Session = Depends(get_db)
 ) -> VerifyByProtocolOutput:
     protocol = scheduler_input.protocol
     scheduler = VerifySchedulerByProtocolUseCase(db)

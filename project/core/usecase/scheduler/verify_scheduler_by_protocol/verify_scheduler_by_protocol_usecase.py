@@ -12,6 +12,6 @@ class VerifySchedulerByProtocolUseCase(UseCaseInterface):
     def execute(self, protocol: str):
         scheduler = self.repository.get_by_protocol(protocol)
         if scheduler is None:
-            return 'error'
+            return "error"
         else:
             return scheduler

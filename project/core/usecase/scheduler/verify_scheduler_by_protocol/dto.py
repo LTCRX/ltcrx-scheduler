@@ -8,9 +8,7 @@ class VerifyByProtocolInput(BaseModel):
     protocol: str = Field(..., description="Number of protocol")
 
     def to_domain(self) -> Scheduler:
-        return Scheduler.create_request_scheduler(
-            protocol=self.protocol
-        )
+        return Scheduler.create_request_scheduler(protocol=self.protocol)
 
 
 class VerifyByProtocolOutput(BaseModel):
