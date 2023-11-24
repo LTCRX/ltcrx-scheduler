@@ -1,14 +1,8 @@
 from typing import Optional
 
-from core.domain.user import (
-    User,
-    Scheduler,
-)
+from core.domain.user import User
 from core.ports.user_repository_port import UserRepositoryPort
-from infrastructure.persistence.models.users import (
-    UserModel,
-    SchedulerModel,
-)
+from infrastructure.persistence.models.users import UserModel
 from sqlalchemy.orm import Session
 
 

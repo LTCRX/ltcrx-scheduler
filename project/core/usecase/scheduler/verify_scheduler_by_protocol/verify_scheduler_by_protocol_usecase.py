@@ -1,3 +1,5 @@
+from core.usecase.usecase_interface import UseCaseInterface
+from sqlalchemy.orm import Session
 from infrastructure.persistence.repository.postgres_scheduler_repository_adapter import (
     PostgresSchedulerRepositoryAdapter,
 )

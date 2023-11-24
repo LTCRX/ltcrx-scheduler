@@ -9,7 +9,7 @@ from core.usecase.scheduler.request_scheduler.dto import (
 from core.usecase.scheduler.request_scheduler.request_scheduler_usecase import (
     RequestSchedulerUseCase,
 )
-from project.core.usecase.scheduler.verify_scheduler_by_protocol.verify_scheduler_by_protocol_usecase import (
+from core.usecase.scheduler.verify_scheduler_by_protocol.verify_scheduler_by_protocol_usecase import (
     VerifySchedulerByProtocolUseCase,
 )
 from infrastructure.api.v1.controller.dependencies.token import get_user_by_token
