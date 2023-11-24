@@ -2,6 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from core.domain.user import User
+from core.usecase.scheduler.verify_scheduler_by_protocol.dto import (
+    VerifyByProtocolInput,
+    VerifyByProtocolOutput,
+)
 from core.usecase.scheduler.request_scheduler.dto import (
     RequestSchedulerInput,
     RequestSchedulerOutput,
@@ -29,11 +33,11 @@ def request_scheduler(
     return usecase.execute(scheduler_input)
 
 
-@router.post('/verify-status', response_model=RequestSchedulerOutput)
+@router.post('/verify-status', response_model=VerifyByProtocolOutput)
 def verify_status(
-        scheduler_input: RequestSchedulerInput,
+        scheduler_input: VerifyByProtocolInput,
         db: Session = Depends(get_db)
-) -> RequestSchedulerOutput:
+) -> VerifyByProtocolOutput:
     protocol = scheduler_input.protocol
     scheduler = VerifySchedulerByProtocolUseCase(db)
     return scheduler.execute(protocol)

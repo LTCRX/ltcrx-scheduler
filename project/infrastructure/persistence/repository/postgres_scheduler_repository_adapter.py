@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from core.domain.scheduler import Scheduler
 from core.ports.scheduler_repository_port import SchedulerRepositoryPort
-from infrastructure.persistence.models.schedulers import SchedulerModel
+from project.infrastructure.persistence.models.schedulers import SchedulerModel
 
 
 class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
@@ -17,7 +17,7 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         return scheduler_model.to_domain()
 
     def get_by_protocol(self, protocol: str) -> Scheduler:
-        scheduler_model = self.session.query(SchedulerModel).filter(SchedulerModel.protocol == protocol).first()
+        scheduler_model = self.db.query(SchedulerModel).filter(SchedulerModel.protocol == protocol).first()
         if scheduler_model is None:
             return None
         else:
