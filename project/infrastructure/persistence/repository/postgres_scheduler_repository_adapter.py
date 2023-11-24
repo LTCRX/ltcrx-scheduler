@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from core.domain.scheduler import Scheduler
 from core.ports.scheduler_repository_port import SchedulerRepositoryPort
-from project.infrastructure.persistence.models.schedulers import SchedulerModel
+from infrastructure.persistence.models.schedulers import SchedulerModel
 
 
 class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
