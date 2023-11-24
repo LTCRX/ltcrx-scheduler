@@ -20,7 +20,4 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         scheduler_model = (
             self.db.query(SchedulerModel).filter(SchedulerModel.protocol == protocol).first()
         )
-        if scheduler_model is None:
-            return None
-        else:
-            return scheduler_model
+        return scheduler_model.to_domain()

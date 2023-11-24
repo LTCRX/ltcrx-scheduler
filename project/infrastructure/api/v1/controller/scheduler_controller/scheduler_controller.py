@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from core.domain.user import User
@@ -37,6 +37,9 @@ def request_scheduler(
 def verify_status(
         scheduler_input: VerifyByProtocolInput, db: Session = Depends(get_db)
 ) -> VerifyByProtocolOutput:
-    protocol = scheduler_input.protocol
-    scheduler = VerifySchedulerByProtocolUseCase(db)
-    return scheduler.execute(protocol)
+    try:
+        protocol = scheduler_input.protocol
+        scheduler = VerifySchedulerByProtocolUseCase(db)
+        return scheduler.execute(protocol)
+    except KeyError as k:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(k))
