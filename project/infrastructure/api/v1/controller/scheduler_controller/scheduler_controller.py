@@ -37,7 +37,7 @@ def request_scheduler(
 
 @router.post("/verify-status", response_model=VerifyByProtocolOutput)
 def verify_status(
-        scheduler_input: VerifyByProtocolInput, db: Session = Depends(get_db)
+    scheduler_input: VerifyByProtocolInput, db: Session = Depends(get_db)
 ) -> VerifyByProtocolOutput:
     try:
         protocol = scheduler_input.protocol
