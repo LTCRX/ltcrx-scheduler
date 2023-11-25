@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from core.domain.scheduler import Scheduler
+from core.exceptions.scheduler_exceptions import SchedulerNotFoundError
 from core.ports.scheduler_repository_port import SchedulerRepositoryPort
 from infrastructure.persistence.models.schedulers import SchedulerModel
 
@@ -20,4 +21,6 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         scheduler_model = (
             self.db.query(SchedulerModel).filter(SchedulerModel.protocol == protocol).first()
         )
+        if scheduler_model is None:
+            raise SchedulerNotFoundError(protocol=protocol)
         return scheduler_model.to_domain()

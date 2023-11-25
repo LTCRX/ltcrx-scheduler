@@ -1,4 +1,4 @@
-class NotFoundError(Exception):
+class EntityNotFoundError(Exception):
     def __init__(self, entity_name, message=None):
         self.entity_name = entity_name
         if message is None:

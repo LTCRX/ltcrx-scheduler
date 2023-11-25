@@ -1,7 +1,7 @@
-from core.exceptions.not_found_exceptions import NotFoundError
+from core.exceptions.entity_exceptions import EntityNotFoundError
 
 
-class SchedulerNotFoundError(NotFoundError):
+class SchedulerNotFoundError(EntityNotFoundError):
     def __init__(self, scheduler_id=None, protocol=None):
         self.scheduler_id = scheduler_id
         self.protocol = protocol

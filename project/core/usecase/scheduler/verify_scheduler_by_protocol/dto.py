@@ -1,5 +1,8 @@
+from dataclasses import asdict
 from datetime import date
 from pydantic import BaseModel, Field
+
+from core.domain.scheduler import Scheduler
 
 
 class VerifyByProtocolInput(BaseModel):
@@ -16,3 +19,7 @@ class VerifyByProtocolOutput(BaseModel):
     current: float
     filter: float
     resolution: float
+
+    @classmethod
+    def from_domain(cls, scheduler: Scheduler) -> "VerifyByProtocolOutput":
+        return cls(**asdict(scheduler))
