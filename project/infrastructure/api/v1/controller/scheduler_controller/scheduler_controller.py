@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
+from core.exceptions.scheduler_exceptions import SchedulerNotFoundError
+
 from core.domain.user import User
 from core.usecase.scheduler.verify_scheduler_by_protocol.dto import (
     VerifyByProtocolInput,
@@ -41,5 +43,5 @@ def verify_status(
         protocol = scheduler_input.protocol
         scheduler = VerifySchedulerByProtocolUseCase(db)
         return scheduler.execute(protocol)
-    except KeyError as k:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(k))
+    except SchedulerNotFoundError as s:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))

@@ -12,4 +12,4 @@ class SchedulerNotFoundError(NotFoundError):
         if protocol:
             message += f" and protocol: {protocol}"
 
-        super().__init__(message)
+        super().__init__("Scheduler", message)
