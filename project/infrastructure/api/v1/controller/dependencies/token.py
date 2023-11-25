@@ -10,6 +10,7 @@ from core.domain.user import User
 from core.services.user_services import UserServices
 from infrastructure.api.v1.controller.token_controler.exceptions.credentials import (
     credentials_exception,
+    credentials_forbidden_exception,
 )
 from infrastructure.persistence.repository.postgres_user_repository_adapter import (
     PostgresUserRepositoryAdapter,
@@ -32,3 +33,12 @@ def get_user_by_token(db: Session = Depends(get_db), token: str = Depends(oauth2
     if user is None:
         raise credentials_exception
     return user
+
+
+def get_superuser_by_token(
+    db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)
+) -> User:
+    user = get_user_by_token(db, token)
+    if user.is_superuser:
+        return user
+    raise credentials_forbidden_exception

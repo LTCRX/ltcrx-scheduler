@@ -47,3 +47,6 @@ class Scheduler:
             filter=filter,
             resolution=resolution,
         )
+
+    def approve(self):
+        self.status = SchedulerStatusEnum.ACCEPTED
