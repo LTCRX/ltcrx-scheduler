@@ -1,4 +1,4 @@
-from project.core.exceptions.not_found_exceptions import NotFoundError
+from core.exceptions.not_found_exceptions import NotFoundError
 
 
 class SchedulerNotFoundError(NotFoundError):
