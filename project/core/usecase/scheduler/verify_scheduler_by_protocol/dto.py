@@ -5,6 +5,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 from core.domain.scheduler import Scheduler
+from core.domain.scheduler_status import SchedulerStatusEnum
 
 
 class VerifyByProtocolInput(BaseModel):
@@ -12,6 +13,7 @@ class VerifyByProtocolInput(BaseModel):
 
 
 class VerifyByProtocolOutput(BaseModel):
+    status: SchedulerStatusEnum = Field(..., description="scheduler status")
     start_date: date = Field(..., description="Start date and time")
     end_date: date = Field(..., description="End date and time")
     quantity_samples: int = Field(..., description="Quantity of samples")
