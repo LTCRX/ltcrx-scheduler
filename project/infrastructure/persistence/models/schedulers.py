@@ -45,6 +45,7 @@ class SchedulerModel(Base):
     @classmethod
     def from_domain(cls, scheduler: Scheduler) -> "SchedulerModel":
         fields = dict(
+            id=scheduler.id,
             user_id=scheduler.user.id,
             status=scheduler.status.name,
             start_date=scheduler.start_date,

@@ -9,5 +9,13 @@ class SchedulerRepositoryPort(ABC):
         pass
 
     @abstractmethod
+    def update(self, scheduler: Scheduler) -> Scheduler:
+        pass
+
+    @abstractmethod
     def get_by_protocol(self, protocol: str) -> Scheduler:
+        pass
+
+    @abstractmethod
+    def get_by_id(self, scheduler_id: int) -> Scheduler:
         pass
