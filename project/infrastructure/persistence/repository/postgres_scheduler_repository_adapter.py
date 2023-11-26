@@ -19,7 +19,7 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
 
     def update(self, scheduler: Scheduler) -> Scheduler:
         scheduler_model = SchedulerModel.from_domain(scheduler)
-        self.db.merge(scheduler_model)
+        scheduler_model = self.db.merge(scheduler_model)
         self.db.commit()
         return scheduler_model.to_domain()
 

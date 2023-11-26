@@ -50,3 +50,6 @@ class Scheduler:
 
     def approve(self):
         self.status = SchedulerStatusEnum.ACCEPTED
+
+    def reject(self):
+        self.status = SchedulerStatusEnum.REJECTED

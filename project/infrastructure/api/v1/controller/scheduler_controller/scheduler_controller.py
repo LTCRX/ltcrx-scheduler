@@ -8,6 +8,8 @@ from core.usecase.scheduler.approve_scheduler.approve_scheduler_usecase import (
     ApproveSchedulerUseCase,
 )
 from core.usecase.scheduler.approve_scheduler.dto import ApproveSchedulerOutput
+from core.usecase.scheduler.reject_scheduler.dto import RejectSchedulerOutput
+from core.usecase.scheduler.reject_scheduler.reject_scheduler_usecase import RejectSchedulerUseCase
 from core.usecase.scheduler.verify_scheduler_by_protocol.dto import (
     VerifyByProtocolInput,
     VerifyByProtocolOutput,
@@ -68,6 +70,23 @@ def approve_scheduler(
     try:
         scheduler = usecase.execute(scheduler_id)
         return ApproveSchedulerOutput.from_domain(scheduler)
+    except SchedulerNotFoundError as s:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@router.post("/{scheduler_id}/reject", response_model=RejectSchedulerOutput)
+def reject_scheduler(
+    scheduler_id: int,
+    current_user: User = Depends(get_superuser_by_token),
+    db: Session = Depends(get_db),
+):
+    usecase = RejectSchedulerUseCase(db)
+
+    try:
+        scheduler = usecase.execute(scheduler_id)
+        return RejectSchedulerOutput.from_domain(scheduler)
     except SchedulerNotFoundError as s:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))
     except Exception as e:
