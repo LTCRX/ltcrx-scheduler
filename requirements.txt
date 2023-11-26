@@ -12,3 +12,4 @@ pydantic[email]==2.5.0
 python-multipart==0.0.6
 alembic==1.12.1
 argon2_cffi==23.1.0
+sqlalchemy-filters==0.13.0

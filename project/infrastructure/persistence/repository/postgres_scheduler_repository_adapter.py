@@ -1,4 +1,7 @@
+from typing import List
+
 from sqlalchemy.orm import Session
+from sqlalchemy_filters import apply_filters, apply_sort
 
 from core.domain.scheduler import Scheduler
 from core.exceptions.scheduler_exceptions import SchedulerNotFoundError
@@ -38,3 +41,14 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         if scheduler_model is None:
             raise SchedulerNotFoundError(scheduler_id=scheduler_id)
         return scheduler_model.to_domain()
+
+    def get_all(
+        self, filters_dict: List[dict] = None, order_dict: List[dict] = None
+    ) -> List[Scheduler]:
+        query = self.db.query(SchedulerModel)
+        if filters_dict:
+            query = apply_filters(query, filters_dict)
+        if order_dict:
+            query = apply_sort(query, order_dict)
+        schedulers_model = query.all()
+        return [scheduler_model.to_domain() for scheduler_model in schedulers_model]

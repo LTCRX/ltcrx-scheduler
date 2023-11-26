@@ -8,10 +8,6 @@ from core.domain.scheduler import Scheduler
 from core.domain.scheduler_status import SchedulerStatusEnum
 
 
-class VerifyByProtocolInput(BaseModel):
-    protocol: str = Field(..., description="Number of protocol")
-
-
 class VerifyByProtocolOutput(BaseModel):
     status: SchedulerStatusEnum = Field(..., description="scheduler status")
     start_date: date = Field(..., description="Start date and time")
