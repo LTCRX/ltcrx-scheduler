@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 from typing import Optional
 from dataclasses import dataclass
@@ -11,8 +11,8 @@ from core.domain.user import User
 class Scheduler:
     user: User
     status: SchedulerStatusEnum
-    start_date: datetime
-    end_date: datetime
+    start_date: date
+    end_date: date
     quantity_samples: int
     number_of_scans: int
     id: Optional[int] = None
@@ -26,8 +26,8 @@ class Scheduler:
     def create_request_scheduler(
         cls,
         user: User,
-        start_date: datetime,
-        end_date: datetime,
+        start_date: date,
+        end_date: date,
         quantity_samples: int,
         number_of_scans: int,
         voltage: Optional[float] = None,
