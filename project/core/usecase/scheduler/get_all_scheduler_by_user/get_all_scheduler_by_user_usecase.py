@@ -8,7 +8,7 @@ from infrastructure.persistence.repository.postgres_scheduler_repository_adapter
 )
 
 
-class GetAllSchedulerUseCase(UseCaseInterface):
+class GetAllSchedulerByUserUseCase(UseCaseInterface):
     def __init__(self, db: Session):
         self.repository = PostgresSchedulerRepositoryAdapter(db)
 

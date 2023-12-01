@@ -28,6 +28,10 @@ from core.usecase.scheduler.request_scheduler.request_scheduler_usecase import (
 from core.usecase.scheduler.verify_scheduler_by_protocol.verify_scheduler_by_protocol_usecase import (
     VerifySchedulerByProtocolUseCase,
 )
+
+from core.usecase.scheduler.get_all_scheduler_by_user.get_all_scheduler_by_user_usecase import (
+    GetAllSchedulerByUserUseCase,
+)
 from infrastructure.api.v1.controller.dependencies.token import (
     get_user_by_token,
     get_superuser_by_token,
@@ -114,12 +118,10 @@ def get_all_scheduler_by_user(
     current_user: User = Depends(get_user_by_token),
     db: Session = Depends(get_db),
 ):
-    usecase = GetAllSchedulerUseCase(db)
+    usecase = GetAllSchedulerByUserUseCase(db)
 
     try:
         schedulers = usecase.execute(current_user.id)
         return GetAllSchedulerByUserOutput.from_domain(schedulers)
-    except SchedulerNotFoundError as s:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
