@@ -93,7 +93,8 @@ def reject_scheduler(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
-    
+
+
 @router.post("/{scheduler_id}/cancel", response_model=CancelSchedulerOutput)
 def cancel_scheduler(
     scheduler_id: int,
