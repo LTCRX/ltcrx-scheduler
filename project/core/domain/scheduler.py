@@ -53,3 +53,6 @@ class Scheduler:
 
     def reject(self):
         self.status = SchedulerStatusEnum.REJECTED
+
+    def cancel(self):
+        self.status = SchedulerStatusEnum.CANCELED
