@@ -9,6 +9,8 @@ from core.domain.user import User
 from core.usecase.scheduler.approve_scheduler.approve_scheduler_usecase import (
     ApproveSchedulerUseCase,
 )
+from core.usecase.scheduler.cancel_scheduler.dto import CancelSchedulerOutput
+from core.usecase.scheduler.cancel_scheduler.cancel_scheduler_usecase import CancelSchedulerUseCase
 from core.usecase.scheduler.approve_scheduler.dto import ApproveSchedulerOutput
 from core.usecase.scheduler.get_all_scheduler.dto import GetAllSchedulerOutput, FiltersInput
 from core.usecase.scheduler.get_all_scheduler.get_all_scheduler_usecase import (
@@ -87,6 +89,23 @@ def reject_scheduler(
     try:
         scheduler = usecase.execute(scheduler_id)
         return RejectSchedulerOutput.from_domain(scheduler)
+    except SchedulerNotFoundError as s:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@router.post("/{scheduler_id}/cancel", response_model=CancelSchedulerOutput)
+def cancel_scheduler(
+    scheduler_id: int,
+    current_user: User = Depends(get_user_by_token),
+    db: Session = Depends(get_db),
+):
+    usecase = CancelSchedulerUseCase(db)
+
+    try:
+        scheduler = usecase.execute(scheduler_id)
+        return CancelSchedulerOutput.from_domain(scheduler)
     except SchedulerNotFoundError as s:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(s))
     except Exception as e:
