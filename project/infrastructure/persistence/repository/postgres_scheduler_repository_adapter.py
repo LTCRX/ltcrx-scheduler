@@ -57,4 +57,4 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         scheduler_models = (
             self.db.query(SchedulerModel).filter(SchedulerModel.user_id == user_id).all()
         )
-        return [Scheduler.from_domain(model) for model in scheduler_models]
+        return [scheduler_model.to_domain() for scheduler_model in scheduler_models]

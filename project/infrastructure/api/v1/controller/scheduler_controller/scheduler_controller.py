@@ -113,7 +113,7 @@ def get_all_scheduler(
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-@router.get("/{current_user}/all", response_model=List[GetAllSchedulerByUserOutput])
+@router.get("/all_by_user", response_model=List[GetAllSchedulerByUserOutput])
 def get_all_scheduler_by_user(
     current_user: User = Depends(get_user_by_token),
     db: Session = Depends(get_db),
