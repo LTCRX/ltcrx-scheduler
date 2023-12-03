@@ -24,3 +24,7 @@ class SchedulerRepositoryPort(ABC):
     @abstractmethod
     def get_all(self, filters_dict: List[dict], order_dict: List[dict]) -> List[Scheduler]:
         pass
+
+    @abstractmethod
+    def get_all_by_user(self, user_id: int) -> List[Scheduler]:
+        pass
