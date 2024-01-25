@@ -12,7 +12,7 @@ from core.usecase.scheduler.approve_scheduler.approve_scheduler_usecase import (
 from core.usecase.scheduler.approve_scheduler.dto import ApproveSchedulerOutput
 from core.usecase.scheduler.get_all_scheduler.dto import GetAllSchedulerOutput, FiltersInput
 from core.usecase.scheduler.get_all_scheduler.get_all_scheduler_usecase import (
-    GetAllSchedulerUseCase,
+    GetAllSchedulerUseCase, 
 )
 from core.usecase.scheduler.reject_scheduler.dto import RejectSchedulerOutput
 from core.usecase.scheduler.reject_scheduler.reject_scheduler_usecase import RejectSchedulerUseCase
@@ -32,6 +32,9 @@ from infrastructure.api.v1.controller.dependencies.token import (
     get_superuser_by_token,
 )
 from infrastructure.persistence.repository.session import get_db
+
+from core.usecase.scheduler.get_schedules_by_user.get_schedules_by_user import SchedulerUseCase
+from core.usecase.scheduler.get_schedules_by_user.dto import GetSchedulesByUserOutput
 
 router = APIRouter()
 
@@ -106,3 +109,27 @@ def get_all_scheduler(
         return GetAllSchedulerOutput.from_domain(schedulers)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    
+
+
+@router.get("/all_by_user", response_model=List[GetSchedulesByUserOutput])
+def get_schedules_by_user(
+    current_user: User = Depends(get_user_by_token),
+    db: Session = Depends(get_db),
+):
+    usecase = SchedulerUseCase(db)
+    
+    try:
+        schedules = usecase.execute(current_user.id)
+        return [GetSchedulesByUserOutput.from_domain(schedule) for schedule in schedules]
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+
+    
+
+
+
+
+

@@ -41,6 +41,14 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
         if scheduler_model is None:
             raise SchedulerNotFoundError(scheduler_id=scheduler_id)
         return scheduler_model.to_domain()
+    
+    # def get_user_by_id(self, scheduler_id: int) -> Scheduler:
+    #     scheduler_model = (
+    #         self.db.query(SchedulerModel).filter(SchedulerModel.id == scheduler_id).first()
+    #     )
+    #     if scheduler_model is None:
+    #         raise SchedulerNotFoundError(scheduler_id=scheduler_id)
+    #     return scheduler_model.to_domain()
 
     def get_all(
         self, filters_dict: List[dict] = None, order_dict: List[dict] = None
@@ -50,5 +58,11 @@ class PostgresSchedulerRepositoryAdapter(SchedulerRepositoryPort):
             query = apply_filters(query, filters_dict)
         if order_dict:
             query = apply_sort(query, order_dict)
+        schedulers_model = query.all()
+        return [scheduler_model.to_domain() for scheduler_model in schedulers_model]
+    
+    
+    def get_by_user_id(self, user_id: int) -> List[Scheduler]:
+        query = self.db.query(SchedulerModel).filter(SchedulerModel.user_id == user_id)
         schedulers_model = query.all()
         return [scheduler_model.to_domain() for scheduler_model in schedulers_model]
